@@ -17,7 +17,8 @@
     "lint": "eslint --fix . && npm run prettify",
     "prepare": "husky install",
     "prettify": "prettier --write . --ignore-path ./.gitignore",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "release": "npm run build-all && npm run publish --access public"
   },
   "devDependencies": {
     "@svgr/cli": "^8.1.0",
