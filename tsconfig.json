@@ -12,9 +12,10 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "jsx": "react"
+    "jsx": "react",
+    "declaration": true
   },
-  "include": ["./**/*.ts"],
+  "include": ["./src/**/*.ts"],
   "ts-node": {
     "esm": true
   }
