@@ -105,7 +105,7 @@ const ${jsonName.replaceAll('-', '_')}: Token = {
     height: ${box.settlementHeight},
     icon: ${componentName},
     name: \`${detail.name}\`,
-    networkType: 'mainnet',
+    networkType: 'Main Net',
     txId: '${box.transactionId}',
 };
 
