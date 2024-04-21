@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { writeFileSync, readdirSync } from 'fs';
+import { writeFileSync, readdirSync, readFileSync } from 'fs';
 const exec = async () => {
   // reading all tokens
   const tokenDir = 'svgs/';
@@ -9,7 +9,7 @@ const exec = async () => {
     await Promise.all(
       files.map(async (iconFile) => {
         try {
-          // const iconContent = readFileSync(tokenDir + iconFile).toString("utf-8");
+          const iconB64 = readFileSync(tokenDir + iconFile).toString('base64');
           const tokenId = iconFile.split('.')[0];
           const detail = (
             await axios.get(
@@ -22,81 +22,11 @@ const exec = async () => {
             )
           ).data;
           const componentName = `Icon${tokenId}`;
-          // const componentCode = transform.sync(iconContent, {
-          //     icon: true,
-          //     dimensions: false,
-          //     exportType: 'default',
-          //     svgo: true,
-          //     typescript: true,
-          //     svgoConfig: {
-          //         "plugins": [
-          //           {
-          //             "name": "preset-default",
-          //             "params": {
-          //               "overrides": {
-          //                 "removeTitle": false
-          //               }
-          //             }
-          //           }
-          //         ]
-          //       },
-          //       jsxRuntime: 'automatic',
-          //       prettier: true,
-          //       prettierConfig: {
-          //         semi: false
-          //       }
-          // },{
-          //     componentName
-          // })
-          // console.log()
-          // const component2 = (await axios.post('https://api.react-svgr.com/api/svgr', {
-          //     "code": iconContent.trim(),
-          //     "options": {
-          //       "dimensions": true,
-          //       "icon": false,
-          //       "native": false,
-          //       "typescript": false,
-          //       "ref": false,
-          //       "memo": false,
-          //       "titleProp": false,
-          //       "descProp": false,
-          //       "expandProps": "end",
-          //       "replaceAttrValues": {
-
-          //       },
-          //       "svgProps": {
-
-          //       },
-          //       "exportType": "default",
-          //       "namedExport": "ReactComponent",
-          //       "jsxRuntime": "classic",
-          //       "svgo": true,
-          //       "svgoConfig": {
-          //         "plugins": [
-          //           {
-          //             "name": "preset-default",
-          //             "params": {
-          //               "overrides": {
-          //                 "removeTitle": false
-          //               }
-          //             }
-          //           }
-          //         ]
-          //       },
-          //       "prettier": true,
-          //       "prettierConfig": {
-          //         "semi": false
-          //       }
-          //     }
-          //   }
-          // )).data
-          // const componentCode = component.replace("{...props}", "").replace("(props)", "()").replaceAll("SvgComponent", componentName)
-          // writeFileSync(`src/icons/${componentName}.tsx`, componentCode);
           const jsonName = `token-${tokenId}`;
           const jsonFileContent = `import ${componentName} from './icons/${componentName}';
 import { Token } from './types';
             
-const ${jsonName.replaceAll('-', '_')}: Token = {
+const ${jsonName.replace('-', '_')}: Token = {
     id: '${tokenId}',
     boxId: '${detail.boxId}',
     decimals: ${detail.decimals},
@@ -104,12 +34,13 @@ const ${jsonName.replaceAll('-', '_')}: Token = {
     emissionAmount: ${detail.emissionAmount.toString()}n,
     height: ${box.settlementHeight},
     icon: ${componentName},
+    iconB64: '${iconB64}',
     name: \`${detail.name}\`,
     networkType: 'Main Net',
     txId: '${box.transactionId}',
 };
 
-export default ${jsonName.replaceAll('-', '_')};
+export default ${jsonName.replace('-', '_')};
 `;
           writeFileSync(`src/${jsonName}.ts`, jsonFileContent);
           return tokenId;
