@@ -1,6 +1,6 @@
 {
   "name": "@minotaur-ergo/icons",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Asset Icons for minotaur wallet",
   "repository": "https://github.com/minotaur-ergo/icons",
   "license": "GPL-3.0",
@@ -22,20 +22,20 @@
   },
   "devDependencies": {
     "@svgr/cli": "^8.1.0",
-    "@types/node": "^20.11.9",
-    "@types/react": "^18.2.61",
+    "@types/node": "^20.14.8",
+    "@types/react": "^18.3.3",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
-    "axios": "^1.6.8",
+    "axios": "^1.7.2",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "extensionless": "^1.9.6",
-    "husky": "^8.0.0",
-    "lint-staged": "^13.0.3",
-    "prettier": "^3.2.4",
-    "ts-node": "^10.7.0",
-    "tsconfig-paths": "^4.1.2",
-    "typescript": "^5.3.3"
+    "husky": "^9.0.11",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.3.2",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.5.2"
   },
   "peerDependencies": {
     "react": "^18.2.0"

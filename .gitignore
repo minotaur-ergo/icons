@@ -136,3 +136,5 @@ dist
 src/index.ts
 src/token-*
 src/icons
+
+.idea/*
